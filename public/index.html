@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Fast Squares</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bits.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Login screen -->
+    <div
+      class="fixed-cover z-2 green lighten-5 flex flex-center-both direction-column center"
+      id="login-screen"
+    >
+      <h1 class="green-text">Welcome to Fast Squares!</h1>
+      <h2 class="light-green-text">Please, name yourself:</h2>
+      <div class="card-panel w60 p0 m0">
+        <form id="login-form">
+          <input
+            type="text"
+            minlength="3"
+            maxlength="15"
+            class="fs8 green-text center"
+            id="l"
+          />
+        </form>
+      </div>
+    </div>
+
+    <!-- Join/Create room screen -->
+    <div
+      class="fixed-cover z-1 green lighten-5 flex flex-center-both direction-column center"
+      id="room-screen"
+    >
+      <h1 class="green-text username">USERNAME</h1>
+
+      <div class="card-panel w60 p0 m0">
+        <form id="enter-room-form">
+          <label for="enter-room-name">Enter Room: </label>
+          <input
+            name="enter-room-name"
+            type="text"
+            minlength="3"
+            maxlength="15"
+            class="fs8 green-text center"
+            id="er"
+          />
+        </form>
+      </div>
+      <div class="card-panel w60 p0 m0">
+        <form id="create-room-form">
+          <label for="create-room-name">Create Room: </label>
+          <input
+            name="create-room-name"
+            type="text"
+            minlength="3"
+            maxlength="15"
+            class="fs8 green-text center"
+            id="cr"
+          />
+        </form>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="card-panel green p2" id="header">
+      <div class="leaderboard card">
+        <span class="card-title">Leaderboard</span>
+        <div class="card-content">
+          <!-- User list in order of score -->
+        </div>
+      </div>
+      <div class="queue card">
+        <span class="card-title"><span class="room">000</span> (<span class="room-num-users"></span>) - Queue:</span>
+        <div class="card-content">
+          <!-- User list is order of queue -->
+        </div>
+      </div>
+      <div class="room-details card pt5">
+        <span class="card-title">Room</span>
+        <div class="card-content details pt0">
+          <!-- Rooms info -->
+          <button class="btn btn-small red white-text m0 mt3 secondary-content" id="leave-room">Leave</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player 1 board -->
+    <div id="slot1-holder">
+      <div class="slot-name-holder"><span class="slot1-name"></span><span class="slot1-lives secondary-content"></span></div>
+      <div class="card-panel green lighten-3" id="player1-board"></div>
+    </div>
+
+    <!-- Chat -->
+    <div class="card-panel green lighten-5 h100 pt1" id="chat">
+      <span class="green-text">
+          <b><span class="username fs2"></span></b> - <span class="room"></span> (<span class="room-num-users"></span>)
+      </span>
+      <hr class="white-text" />
+      <div class="card-panel h80 p0">
+        <div class="chat-container"></div>
+        <form class="p0 m0" id="chat-form">
+          <div class="flex flex-center-vertical">
+            <div class="w90 p0 m0"><input type="text" id="m" autofocus autocomplete="off" /></div>
+            <input type="submit" class="btn w10" value=">" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Player 2 board -->
+    <div id="slot2-holder">
+        <div class="slot-name-holder"><span class="slot2-name"></span><span class="slot2-lives secondary-content"></span></div>
+        <div class="card-panel green lighten-3" id="player2-board"></div>
+      </div>
+    </main>
+    
+
+    <!-- Dependency Scripts -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Bundle -->
+    <script src="js/bundle.js"></script>
+  </body>
+</html>
