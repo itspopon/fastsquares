@@ -1,6 +1,7 @@
 const Room = require("../models/room");
 
 const Positions = require("../util/Positions");
+const UserList = require("../util/UserList");
 
 exports.movePlayer = (socket, rooms) => {
   socket.on("move player", data => {
@@ -30,7 +31,7 @@ exports.movePlayer = (socket, rooms) => {
               u.queue -= 1;
             });
             let queuePositions = room.getQueueIdsAndPosition();
-            console.log(queuePositions);
+            //console.log(queuePositions);
             let ignorePlayer1 = queuePositions.findIndex(
               u => u.id === room.player1.id
             );
@@ -47,7 +48,7 @@ exports.movePlayer = (socket, rooms) => {
               u.queue -= 1;
             });
             let queuePositions = room.getQueueIdsAndPosition();
-            console.log(queuePositions);
+            //console.log(queuePositions);
             let ignorePlayer2 = queuePositions.findIndex(
               u => u.id === room.player2.id
             );
@@ -59,6 +60,7 @@ exports.movePlayer = (socket, rooms) => {
             room.setPlayer(1, room.userList.get(queuePositions[0].id));
           }
         }
+        console.warn(room.userList.get(socket.id).username, "desynced! Disconnecting...");
         room.userList.delete(socket.id);
       }
       socket.leave(userInfo.room);
@@ -109,7 +111,7 @@ exports.movePlayer = (socket, rooms) => {
               u.queue -= 1;
             });
             let queuePositions = room.getQueueIdsAndPosition();
-            console.log(queuePositions);
+            //console.log(queuePositions);
             let ignorePlayer1 = queuePositions.findIndex(
               u => u.id === room.player1.id
             );
@@ -126,7 +128,7 @@ exports.movePlayer = (socket, rooms) => {
               u.queue -= 1;
             });
             let queuePositions = room.getQueueIdsAndPosition();
-            console.log(queuePositions);
+            //console.log(queuePositions);
             let ignorePlayer2 = queuePositions.findIndex(
               u => u.id === room.player2.id
             );
@@ -138,6 +140,7 @@ exports.movePlayer = (socket, rooms) => {
             room.setPlayer(1, room.userList.get(queuePositions[0].id));
           }
         }
+        console.warn(room.userList.get(socket.id).username, "desynced! Disconnecting...");
         room.userList.delete(socket.id);
       }
       socket.leave(userInfo.room);
@@ -188,7 +191,7 @@ exports.movePlayer = (socket, rooms) => {
       socket.to(userInfo.getRoom()).emit("objective collected", sendingData);
       if (who === 1) {
         room.player2.lives -= 1;
-        console.log("Player 2 lost a life and now has ", room.player2.lives);
+        //console.log("Player 2 lost a life and now has ", room.player2.lives);
         if (room.player2.lives <= 0) {
           if (room.getOnline() <= 2) return;
           socket.to(userInfo.getRoom()).emit("out of lives", { who: 2 });
@@ -203,7 +206,7 @@ exports.movePlayer = (socket, rooms) => {
             u.queue -= 1;
           });
           let queuePositions = room.getQueueIdsAndPosition();
-          console.log(queuePositions);
+          //console.log(queuePositions);
           let ignorePlayer1 = queuePositions.findIndex(
             u => u.id === room.player1.id
           );
@@ -213,7 +216,7 @@ exports.movePlayer = (socket, rooms) => {
         }
       } else {
         room.player1.lives -= 1;
-        console.log("Player 1 lost a life and now has", room.player1.lives);
+        //console.log("Player 1 lost a life and now has", room.player1.lives);
         if (room.player1.lives <= 0) {
           if (room.getOnline() <= 2) return;
           socket.to(userInfo.getRoom()).emit("out of lives", { who: 1 });
@@ -232,10 +235,10 @@ exports.movePlayer = (socket, rooms) => {
             u => u.id === room.player2.id
           );
           queuePositions.splice(ignorePlayer2, 1);
-          console.log(
+          /*console.log(
             "Next in queue:",
             room.userList.get(queuePositions[0].id)
-          );
+          );*/
           room.setPlayer(1, room.userList.get(queuePositions[0].id));
         }
       }
