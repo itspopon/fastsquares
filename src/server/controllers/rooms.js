@@ -107,7 +107,9 @@ exports.leaveRoom = (socket, rooms) => {
   socket.on("leave room", data => {
     let userInfo = socket.userInfo;
     let room = rooms.get(userInfo.getRoom());
-
+    if (!room) {
+      socket.emit("disconnect", "BEGONE!");
+    }
     if (room.getOnline() === 1) {
       // if no one else left in the room, delete it
       rooms.delete(userInfo.getRoom());
