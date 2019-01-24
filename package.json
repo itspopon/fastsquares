@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && nodemon index.js",
+    "start": "node index.js",
+    "dev": "webpack && nodemon index.js",
     "build": "webpack --optimize-minimize",
     "watch": "webpack --watch"
   },
