@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Fast Squares</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bits.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
-  </head>
-  <body>
+<%- include('includes/head.ejs') %>
     <main>
       <!-- Login screen -->
     <div
@@ -121,12 +109,4 @@
     </main>
     
 
-    <!-- Dependency Scripts -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/materialize.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    
-    <!-- Bundle -->
-    <script src="js/bundle.js"></script>
-  </body>
-</html>
+    <%- include('includes/end.ejs') %>
