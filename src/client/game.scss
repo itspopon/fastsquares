@@ -156,22 +156,22 @@ main {
 }
 
 .square {
-  background: url("../img/white_square.svg") center/cover;
+  background: url("/public/img/white_square.svg") center/cover;
   border-radius: 0.5rem;
 }
 
 .square.obstacle {
-  background: url("../img/black_square.svg") center/cover;
+  background: url("/public/img/black_square.svg") center/cover;
   filter: brightness(50%);
 }
 
 .square.objective {
-  background: url("../img/green_square.svg") center/cover;
+  background: url("/public/img/green_square.svg") center/cover;
   filter: hue-rotate(290deg) brightness(90%) saturate(130%);
 }
 
 .square.enemy {
-  background: url("../img/blue_square.svg") center/cover;
+  background: url("/public/img/blue_square.svg") center/cover;
   filter: hue-rotate(300deg) saturate(300%) brightness(100%) !important;
 }
 
@@ -180,7 +180,7 @@ main {
 }
 
 .square.player {
-  background: url("../img/blue_square.svg") center/cover;
+  background: url("/public/img/blue_square.svg") center/cover;
   filter: saturate(300%) brightness(100%) !important;
 }
 
