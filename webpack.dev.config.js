@@ -42,7 +42,6 @@ module.exports = {
   optimization: {
     minimize: true
   },
-  devtool: "source-map",
   resolve: {
     extensions: ['*', '.js']
   },
