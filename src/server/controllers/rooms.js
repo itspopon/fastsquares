@@ -4,30 +4,36 @@ const UserList = require("../util/UserList");
 
 exports.createRoom = (socket, rooms) => {
   socket.on("create room", data => {
+    console.log("Create room:", data);
     let userInfo = socket.userInfo;
-    if (userInfo.room !== "") return;
-    if (Room.isInvalidCreationName(data.roomName, rooms)) {
-      socket.emit("invalid", Room.isInvalidCreationName(data.roomName, rooms));
+    if (userInfo.room !== "") {
+      console.log("Room aint empty", userInfo);
+      return;
+    }
+    if (Room.isInvalidCreationName(data.room, rooms)) {
+      socket.emit("invalid", Room.isInvalidCreationName(data.room, rooms));
+      console.log("invalid room name");
       return;
     }
 
     socket.userInfo.setType("player");
-    rooms.set(data.roomName, new Room(data.roomName, socket.userInfo));
-    //console.log("Room object created:", rooms.get(data.roomName));
-    let createdRoom = rooms.get(data.roomName);
-    socket.userInfo.setRoom(data.roomName);
-    socket.join(data.roomName);
+    rooms.set(data.room, new Room(data.room, socket.userInfo));
+    //console.log("Room object created:", rooms.get(data.room));
+    let createdRoom = rooms.get(data.room);
+    socket.userInfo.setRoom(data.room);
+    socket.join(data.room);
 
     //console.log("Emitted objective was: ", createdRoom.objective, typeof createdRoom.objective);
+    console.log("Emitting room created socket");
     socket.emit("room created", {
-      room: data.roomName,
+      room: data.room,
       online: 1,
       type: "player",
       obstacles: createdRoom.getObstaclesAsArray(),
       objective: { ...createdRoom.objective },
-      userList: UserList.getFullUserList(createdRoom.userList)
+      userList: UserList.getUserListThatClientCanUnderstand(createdRoom.userList)
     });
-    // console.log("Room created:", data.roomName, userInfo.getUsername());
+    // console.log("Room created:", data.room, userInfo.getUsername());
   });
 };
 
@@ -74,9 +80,7 @@ exports.enterRoom = (socket, rooms) => {
       room: socket.userInfo.getRoom(),
       owner: {
         id: room.owner.id,
-        username: room.owner.username,
-        score: "unused",
-        queue: "unused"
+        username: room.owner.username
       },
       online: room.getOnline(),
       slot: socket.userInfo.getType(),

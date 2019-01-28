@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import escape from "validator/lib/escape";
 import isLength from "validator/lib/isLength";
+import unescape from "validator/lib/unescape";
 
 const getNameColor = (msgItem, username) => {
   if (msgItem.username === "@") {
@@ -19,13 +20,13 @@ const MessageList = props => {
   /* props.messages > array of objects {username, message[, isPlayer]} */
   return (
     <div className="chat-container">
-      {props.messages.map(msgItem => {
+      {props.messages.map((msgItem,i) => {
         return (
-          <div className="animated fadeIn fastest chat-message">
+          <div key={i} className="animated fadeIn fastest chat-message">
             <span className={getNameColor(msgItem, props.username)}>
               {msgItem.username}
             </span>
-            {msgItem.message}
+            {" "+msgItem.message}
           </div>
         );
       })}
@@ -44,7 +45,10 @@ class ChatBox extends Component {
       chat: "",
       storedMessages: []
     };
-    props.socket.on("new message", data => {
+  }
+
+  componentDidMount () {
+    this.state.socket.on("new message", data => {
       let newMessages = [];
       newMessages = [...this.state.storedMessages];
       if (this.state.storedMessages.length >= 20) {
@@ -62,6 +66,10 @@ class ChatBox extends Component {
       username: this.state.username,
       message: this.state.chat
     });
+    if (this.state.chat[0] === "/") {
+      this.setState({...this.state, chat: ""});
+      return;
+    }
     let newMessages = [];
     newMessages = [...this.state.storedMessages];
     if (this.state.storedMessages.length >= 20) {
@@ -96,7 +104,7 @@ class ChatBox extends Component {
                   autoFocus
                   autoComplete="off"
                   onChange={e =>
-                    this.setState({ chat: escape(e.target.value) })
+                    this.setState({ chat: e.target.value })
                   }
                   value={this.state.chat}
                 />

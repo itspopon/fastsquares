@@ -9,22 +9,24 @@ export default class Room extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: props.username,
-      room: props.room,
       socket: props.socket,
-      users: [
-        { username: "mea", score: 12, queue: 1 },
-        { username: "zubon", score: 33, queue: 2 }
-      ],
-      player1: { id: "", position: { x: 0, y: 0 } },
-      player2: { id: "", position: { x: 0, y: 0 } },
-      objective: { x: 3, y: 3 },
-      obstacles: new Set([JSON.stringify({ x: 1, y: 1 })])
+      /* User */
+      username: props.username,
+      slot: props.slot,
+      /* Room */
+      room: props.room,
+      users: props.roomData.userList,
+      owner: props.roomData.owner,
+      player1: props.player1,
+      player2: props.player2,
+      objective: props.roomData.objective,
+      obstacles: new Set(props.roomData.obstacles)
     };
   }
 
   componentDidMount() {
     this.state.socket.emit("login", { username: this.state.username });
+    console.log("Userlist:",this.state.users);
   }
 
   render() {
@@ -71,5 +73,6 @@ export default class Room extends Component {
 Room.propTypes = {
   username: PropTypes.string.isRequired,
   room: PropTypes.string.isRequired,
-  socket: PropTypes.object.isRequired
+  socket: PropTypes.object.isRequired,
+  roomData: PropTypes.object.isRequired
 };
