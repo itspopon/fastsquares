@@ -2,7 +2,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   mode: "production",
-  entry: './src/client/index.js',
+  entry: './src/client/index.jsx',
   module: {
     rules: [
       {

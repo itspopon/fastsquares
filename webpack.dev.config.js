@@ -2,7 +2,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   mode: "development",
-  entry: './src/client/index.js',
+  entry: './src/client/index.jsx',
   module: {
     rules: [
       {
@@ -43,7 +43,7 @@ module.exports = {
     minimize: true
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['*', '.js', '.jsx']
   },
   output: {
     path: __dirname + '/public/js',
