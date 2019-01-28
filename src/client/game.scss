@@ -156,22 +156,22 @@ main {
 }
 
 .square {
-  background: url("/public/img/white_square.svg") center/cover;
+  background: url("/img/white_square.svg") center/cover;
   border-radius: 0.5rem;
 }
 
 .square.obstacle {
-  background: url("/public/img/black_square.svg") center/cover;
+  background: url("/img/black_square.svg") center/cover;
   filter: brightness(50%);
 }
 
 .square.objective {
-  background: url("/public/img/green_square.svg") center/cover;
+  background: url("/img/green_square.svg") center/cover;
   filter: hue-rotate(290deg) brightness(90%) saturate(130%);
 }
 
-.square.enemy {
-  background: url("/public/img/blue_square.svg") center/cover;
+.square.player2 {
+  background: url("/img/blue_square.svg") center/cover;
   filter: hue-rotate(300deg) saturate(300%) brightness(100%) !important;
 }
 
@@ -179,8 +179,8 @@ main {
   filter: brightness(90%);
 }
 
-.square.player {
-  background: url("/public/img/blue_square.svg") center/cover;
+.square.player1 {
+  background: url("/img/blue_square.svg") center/cover;
   filter: saturate(300%) brightness(100%) !important;
 }
 

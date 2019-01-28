@@ -36,6 +36,8 @@ setInterval(() => console.log("Rooms online: ", rooms.size), 5 * 60 * 1000);
 
 io.on("connection", function(socket) {
   socket.userInfo = {};
+  console.log("A user connected");
+
   /* User */
   UserController.login(socket);
   UserController.disconnect(socket, rooms);

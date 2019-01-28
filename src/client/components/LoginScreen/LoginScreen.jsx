@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import trim from "validator/lib/trim";
+
 import "./LoginScreen.css";
 
 class LoginScreen extends Component {
@@ -26,7 +28,7 @@ class LoginScreen extends Component {
               maxLength="15"
               className="fs8 green-text center"
               value={this.state.username}
-              onChange={e => this.setState({ username: e.target.value })}
+              onChange={e => this.setState({ username: trim(e.target.value) })}
             />
           </form>
         </div>

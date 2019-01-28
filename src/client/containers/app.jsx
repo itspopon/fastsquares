@@ -1,36 +1,58 @@
 import React, { Component } from "react";
+import io from "socket.io-client";
+
+import { isValidName } from "../util/Input";
 
 import Layout from "../components/Layout/Layout";
 import LoginScreen from "../components/LoginScreen/LoginScreen";
 import RoomScreen from "../components/RoomScreen/RoomScreen";
+import Room from "./Room";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // Basics
       isLoggedIn: false,
       inGame: false,
-      username: ""
+      username: "",
+      room: "",
+      socket: io()
     };
   }
 
   onLogin(e, username) {
     e.preventDefault();
-    this.setState({ ...this.state, isLoggedIn: true, username });
-    return false;
+    if (!isValidName(username)) {
+      alert(
+        "Please choose a name that is between 3 and 15 characters long and that only uses letters and numbers."
+      );
+      return;
+    }
+    this.setState({ ...this.state, isLoggedIn: true, username: username });
   }
 
   onEnterRoomSubmit(e, room) {
     e.preventDefault();
-    // Validation logic
-    this.setState({...this.state, inGame: true});
+    if (!isValidName(room)) {
+      alert(
+        "Please enter a room name that is between 3 and 15 characters long and that only uses letters and numbers."
+      );
+      return;
+    }
+    this.setState({ ...this.state, room, inGame: true });
     console.log("Entering room:", room);
   }
 
   onCreateRoomSubmit(e, room) {
     e.preventDefault();
-    // Validation logic
-    this.setState({...this.state, inGame: true});
+    if (!isValidName(room)) {
+      alert(
+        "Please enter a room name that is between 3 and 15 characters long and that only uses letters and numbers."
+      );
+      return;
+    }
+    this.setState({ ...this.state, room, inGame: true });
     console.log("Creating room:", room);
   }
 
@@ -51,7 +73,13 @@ class App extends Component {
         />
       );
     }
-    return null;
+    return (
+      <Room
+        username={this.state.username}
+        room={this.state.room}
+        socket={this.state.socket}
+      />
+    );
   }
 
   render() {

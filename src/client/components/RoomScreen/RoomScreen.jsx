@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import trim from "validator/lib/trim";
+
 import "./RoomScreen.css";
 
 class RoomScreen extends Component {
@@ -26,7 +28,7 @@ class RoomScreen extends Component {
               maxLength="15"
               className="fs8 green-text center"
               value={this.state.enterRoom}
-              onChange={e => this.setState({enterRoom: e.target.value})}
+              onChange={e => this.setState({enterRoom: trim(e.target.value)})}
             />
           </form>
         </div>
@@ -40,7 +42,7 @@ class RoomScreen extends Component {
               maxLength="15"
               className="fs8 green-text center"
               value={this.state.createRoom}
-              onChange={e => this.setState({createRoom: e.target.value})}
+              onChange={e => this.setState({createRoom: trim(e.target.value)})}
             />
           </form>
         </div>

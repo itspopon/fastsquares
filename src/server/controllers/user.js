@@ -5,6 +5,7 @@ const User = require("../models/user");
 
 exports.login = (socket) => {
   socket.on("login", data => {
+    console.log(data.username, "logged in.")
     if (Input.isValidInput(data.username)) {
       socket.userInfo = new User(socket.id, data.username);
       //console.log("New user created:", socket.userInfo);
